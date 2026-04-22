@@ -73,7 +73,21 @@ Reference these guidelines when:
 
 ### 5. Re-render Optimization (MEDIUM)
 
-Rule references will be added incrementally under `rules/rerender-*.md`.
+- `rerender-defer-reads` - Don't subscribe to state only used in callbacks
+- `rerender-memo` - Extract expensive work into memoized components
+- `rerender-memo-with-default-value` - Hoist default non-primitive props
+- `rerender-dependencies` - Use primitive dependencies in effects
+- `rerender-derived-state` - Subscribe to derived booleans, not raw values
+- `rerender-derived-state-no-effect` - Derive state during render, not effects
+- `rerender-functional-setstate` - Use functional setState for stable callbacks
+- `rerender-lazy-state-init` - Pass function to useState for expensive values
+- `rerender-simple-expression-in-memo` - Avoid memo for simple primitives
+- `rerender-split-combined-hooks` - Split hooks with independent dependencies
+- `rerender-move-effect-to-event` - Put interaction logic in event handlers
+- `rerender-transitions` - Use startTransition for non-urgent updates
+- `rerender-use-deferred-value` - Defer expensive renders to keep input responsive
+- `rerender-use-ref-transient-values` - Use refs for transient frequent values
+- `rerender-no-inline-components` - Don't define components inside components
 
 ### 6. Rendering Performance (MEDIUM)
 
