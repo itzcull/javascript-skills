@@ -1,6 +1,6 @@
-# Frontend Agent Skills
+# JavaScript Agent Skills
 
-This repository is a scaffold for an [Agent Skills](https://agentskills.io/) library focused on frontend development.
+This repository is a scaffold for an [Agent Skills](https://agentskills.io/) library focused on JavaScript development.
 
 It does not ship any concrete skills yet. Instead, it gives you a clean structure for adding them over time.
 
