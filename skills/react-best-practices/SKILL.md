@@ -37,7 +37,12 @@ Reference these guidelines when:
 
 ### 1. Eliminating Waterfalls (CRITICAL)
 
-Rule references will be added incrementally under `rules/async-*.md`.
+- `async-cheap-condition-before-await` - Check cheap sync conditions before awaiting flags or remote values
+- `async-defer-await` - Move await into branches where actually used
+- `async-parallel` - Use Promise.all() for independent operations
+- `async-dependencies` - Use better-all for partial dependencies
+- `async-api-routes` - Start promises early, await late in request handlers
+- `async-suspense-boundaries` - Use Suspense to stream content
 
 ### 2. Bundle Size Optimization (CRITICAL)
 
