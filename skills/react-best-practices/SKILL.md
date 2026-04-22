@@ -122,7 +122,10 @@ Reference these guidelines when:
 
 ### 8. Advanced Patterns (LOW)
 
-Rule references will be added incrementally under `rules/advanced-*.md`.
+- `advanced-effect-event-deps` - Don't put `useEffectEvent` results in effect deps
+- `advanced-event-handler-refs` - Store event handlers in refs
+- `advanced-init-once` - Initialize app once per app load
+- `advanced-use-latest` - useLatest for stable callback refs
 
 ## How to Use
 
