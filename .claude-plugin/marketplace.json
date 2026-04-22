@@ -1,0 +1,23 @@
+{
+  "name": "frontend-skills",
+  "owner": {
+    "name": "Will Cullen",
+    "url": "https://cullenlabs.com"
+  },
+  "metadata": {
+    "description": "JavaScript and frontend development skills for AI coding agents",
+    "version": "1.0.0",
+    "repository": "https://github.com/itzcull/frontend-skills"
+  },
+  "plugins": [
+    {
+      "name": "frontend-skills",
+      "description": "Frontend and JavaScript agent skills including React best practices",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./skills/react-best-practices"
+      ]
+    }
+  ]
+}
