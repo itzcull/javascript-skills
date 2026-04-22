@@ -91,7 +91,17 @@ Reference these guidelines when:
 
 ### 6. Rendering Performance (MEDIUM)
 
-Rule references will be added incrementally under `rules/rendering-*.md`.
+- `rendering-animate-svg-wrapper` - Animate div wrapper, not SVG element
+- `rendering-content-visibility` - Use content-visibility for long lists
+- `rendering-hoist-jsx` - Extract static JSX outside components
+- `rendering-svg-precision` - Reduce SVG coordinate precision
+- `rendering-hydration-no-flicker` - Use inline script for client-only data
+- `rendering-hydration-suppress-warning` - Suppress expected mismatches
+- `rendering-activity` - Use Activity component for show/hide
+- `rendering-conditional-render` - Use ternary, not && for conditionals
+- `rendering-usetransition-loading` - Prefer useTransition for loading state
+- `rendering-resource-hints` - Use React DOM resource hints for preloading
+- `rendering-script-defer-async` - Use defer or async on script tags
 
 ### 7. JavaScript Performance (LOW-MEDIUM)
 
