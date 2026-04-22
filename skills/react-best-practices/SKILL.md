@@ -46,7 +46,12 @@ Reference these guidelines when:
 
 ### 2. Bundle Size Optimization (CRITICAL)
 
-Rule references will be added incrementally under `rules/bundle-*.md`.
+- `bundle-barrel-imports` - Import directly, avoid barrel files
+- `bundle-analyzable-paths` - Prefer statically analyzable import and file-system paths to avoid broad bundles and traces
+- `bundle-dynamic-imports` - Use dynamic imports for heavy components
+- `bundle-defer-third-party` - Load analytics/logging after hydration
+- `bundle-conditional` - Load modules only when feature is activated
+- `bundle-preload` - Preload on hover/focus for perceived speed
 
 ### 3. Server-Side Performance (HIGH)
 
