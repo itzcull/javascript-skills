@@ -1,6 +1,6 @@
 ---
 name: typescript-guidelines
-description: Mandatory TypeScript strict mode and type-safety guidelines. Use whenever writing new TypeScript, improving existing TypeScript, reviewing TypeScript, refactoring TypeScript, deciding between schemas and plain types, choosing type vs interface, modeling domain values, configuring tsconfig, or checking TypeScript code for unsafe patterns.
+description: Mandatory TypeScript strict mode and type-safety guidelines. Use whenever writing new TypeScript, improving existing TypeScript, reviewing TypeScript, refactoring TypeScript, deciding between schemas and plain TypeScript definitions, choosing type vs interface, modeling domain values, configuring tsconfig, or checking TypeScript code for unsafe patterns.
 license: MIT
 metadata:
   author: itzcull
@@ -25,8 +25,8 @@ This includes:
 - Improving old TypeScript code, even when the requested change is small.
 - Refactoring TypeScript without changing behavior.
 - Reviewing TypeScript for correctness, maintainability, type safety, boundary parsing, unsafe assertions, or schema duplication.
-- Deciding whether a value needs a runtime schema or only a compile-time type.
-- Choosing between `type` and `interface`.
+- Deciding whether a value needs a runtime schema or only a compile-time TypeScript definition.
+- Choosing between `type` and `interface`, especially for data shapes, component props, argument objects, and configuration options.
 - Setting up or auditing `tsconfig` strictness.
 - Creating test factories or shared test data for TypeScript code.
 
@@ -93,7 +93,7 @@ Guidelines:
 
 ## Type vs Interface
 
-Use `type` for data. Reserve `interface` for behavior contracts.
+Use `type` for domain data. Use `interface` for call signatures and behavior contracts.
 
 Use `type` for:
 
@@ -102,10 +102,13 @@ Use `type` for:
 - Intersections.
 - Mapped types.
 - Domain data structures.
-- Component props and internal state shapes.
+- Internal state shapes.
 
 Use `interface` for:
 
+- Component props.
+- Argument objects.
+- Configuration options.
 - Ports.
 - Adapters.
 - Dependency injection contracts.
@@ -118,6 +121,16 @@ type PaymentRequest = {
   readonly amount: number;
   readonly currency: string;
 };
+
+interface PaymentFormProps {
+  readonly payment: PaymentRequest;
+  readonly onSubmit: (payment: PaymentRequest) => void;
+}
+
+interface ChargePaymentOptions {
+  readonly request: PaymentRequest;
+  readonly idempotencyKey: string;
+}
 
 interface Logger {
   log(message: string): void;
@@ -180,9 +193,9 @@ Typical schema-required cases:
 - URL params, form data, and environment variables.
 - Reusable test data validated against production contracts.
 
-## When Plain Types Are Enough
+## When Plain TypeScript Definitions Are Enough
 
-Plain TypeScript types are enough when the value is purely internal and has no runtime validation need.
+Plain TypeScript definitions are enough when the value is purely internal and has no runtime validation need.
 
 Typical plain-type cases:
 
@@ -191,7 +204,7 @@ Typical plain-type cases:
 - Discriminated unions for control flow.
 - Branded primitives.
 - Behavior contracts.
-- Component props that do not cross a trust boundary.
+- Component props, argument objects, and configuration options that do not cross a trust boundary.
 
 Example:
 
@@ -223,7 +236,7 @@ Ask these questions in order:
 
 If the answer to any question is yes, use a schema and derive the type from it.
 
-If the value is purely internal and compile-time-only, use a plain type.
+If the value is purely internal and compile-time-only, use a plain TypeScript definition.
 
 ## Test Data Rules
 
@@ -274,7 +287,7 @@ Keep local-only types near the implementation. Split schemas or types into dedic
 - Are schema-derived types used instead of duplicated contract shapes?
 - Are internal-only values modeled with simple plain types?
 - Are data structures `readonly` where practical?
-- Are `type` and `interface` used according to data vs behavior semantics?
+- Are `type` and `interface` used according to domain data vs call signature and behavior semantics?
 - Do tests import real schemas and shared types?
 - Do file names follow `kebab-case`, `*.schemas.ts`, and `*.types.ts` conventions?
 
