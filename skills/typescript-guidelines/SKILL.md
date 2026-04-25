@@ -39,7 +39,6 @@ Do not treat this as optional guidance. If a task involves TypeScript, apply the
 - Do not use type assertions unless the justification is explicit and local.
 - Do not use `@ts-ignore` or `@ts-expect-error` without an explanation of why the type system cannot express the case.
 - Apply the same type-safety rules to tests as production code.
-- Prefer readonly data by default.
 - Prefer domain-specific types over generic primitives when values are easy to mix up.
 - Define schemas first at trust boundaries and derive types from schemas.
 - Parse once at the boundary, then trust parsed types internally.
@@ -73,13 +72,13 @@ Prefer this compiler baseline unless the existing project has a stricter standar
 Use types that encode meaning, not just structure.
 
 ```typescript
-type UserId = string & { readonly brand: unique symbol };
-type PaymentAmount = number & { readonly brand: unique symbol };
+type UserId = string & { brand: unique symbol };
+type PaymentAmount = number & { brand: unique symbol };
 
 type User = {
-  readonly id: UserId;
-  readonly email: string;
-  readonly role: UserRole;
+  id: UserId;
+  email: string;
+  role: UserRole;
 };
 ```
 
@@ -118,18 +117,18 @@ Example:
 
 ```typescript
 type PaymentRequest = {
-  readonly amount: number;
-  readonly currency: string;
+  amount: number;
+  currency: string;
 };
 
 interface PaymentFormProps {
-  readonly payment: PaymentRequest;
-  readonly onSubmit: (payment: PaymentRequest) => void;
+  payment: PaymentRequest;
+  onSubmit: (payment: PaymentRequest) => void;
 }
 
 interface ChargePaymentOptions {
-  readonly request: PaymentRequest;
-  readonly idempotencyKey: string;
+  request: PaymentRequest;
+  idempotencyKey: string;
 }
 
 interface Logger {
@@ -210,19 +209,19 @@ Example:
 
 ```typescript
 type Point = {
-  readonly x: number;
-  readonly y: number;
+  x: number;
+  y: number;
 };
 
 type Result<T, E = Error> =
-  | { readonly success: true; readonly data: T }
-  | { readonly success: false; readonly error: E };
+  | { ok: true; value: T }
+  | { ok: false; error: E };
 
 type LoadingState =
-  | { readonly status: "idle" }
-  | { readonly status: "loading" }
-  | { readonly status: "success"; readonly data: unknown }
-  | { readonly status: "error"; readonly error: Error };
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "success"; data: unknown }
+  | { status: "error"; error: Error };
 ```
 
 ## Decision Framework
@@ -286,7 +285,6 @@ Keep local-only types near the implementation. Split schemas or types into dedic
 - Are trust boundaries parsed once with real schemas?
 - Are schema-derived types used instead of duplicated contract shapes?
 - Are internal-only values modeled with simple plain types?
-- Are data structures `readonly` where practical?
 - Are `type` and `interface` used according to domain data vs call signature and behavior semantics?
 - Do tests import real schemas and shared types?
 - Do file names follow `kebab-case`, `*.schemas.ts`, and `*.types.ts` conventions?
@@ -299,9 +297,3 @@ When applying this skill, produce one of these outputs depending on the task:
 - For review: Findings ordered by risk, with file references and concrete fixes.
 - For convention decisions: A direct recommendation with the schema/plain-type rationale.
 - For setup: A strict `tsconfig` baseline and migration notes for any existing incompatibilities.
-
-## References
-
-- Source guidance: `~/.claude/docs/typescript.md`
-- Related testing guidance: `~/.claude/docs/testing.md`
-- Related workflow guidance: `~/.claude/docs/workflow.md`
